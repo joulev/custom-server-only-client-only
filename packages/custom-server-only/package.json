@@ -1,0 +1,21 @@
+{
+  "name": "custom-server-only",
+  "description": "This is a marker package to indicate that a module can only be used in Server Components, with a customisable error message.",
+  "keywords": [
+    "react"
+  ],
+  "version": "0.0.1",
+  "license": "MIT",
+  "files": [
+    "default.js",
+    "react-server.js"
+  ],
+  "main": "default.js",
+  "types": "index.d.ts",
+  "exports": {
+    ".": {
+      "react-server": "./react-server.js",
+      "default": "./default.js"
+    }
+  }
+}

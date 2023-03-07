@@ -1,73 +1,55 @@
-# Turborepo starter
+# `custom-server-only` and `custom-client-only`
 
-This is an official pnpm starter turborepo.
+This package is a `server-only` and `client-only` alternative that library authors can use to customise the error message.
 
-## What's inside?
+## Why?
 
-This turborepo uses [pnpm](https://pnpm.io) as a package manager. It includes the following packages/apps:
+`server-only` and `client-only` are great if you use it in your own apps. If it's imported in a third party library however, the error message is not so clear to debug anymore.
 
-### Apps and Packages
+For example, say I make a library where a particular module must be client-only. If you use the module in a server environment, you get
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `ui`: a stub React component library shared by both `web` and `docs` applications
-- `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `tsconfig`: `tsconfig.json`s used throughout the monorepo
+> This module cannot be imported from a Server Component module. It should only be used from a Client Component.
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+Since you didn't use `client-only` explicitly, you are left wondering what does "this module" refer to here.
 
-### Utilities
+With `custom-server-only` and `custom-client-only` here however, I can customise it to something like
 
-This turborepo has some additional tools already setup for you:
+> `"my-package/use-window-size"` cannot be used in a server component. Please use a client component instead. Refer to https://my-package.js.org/use-window-size for more info.
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+which makes it easier for library users to debug.
 
-### Build
+## Usage
 
-To build all apps and packages, run the following command:
+### `custom-server-only`
 
-```
-cd my-turborepo
-pnpm run build
+Before:
+
+```ts
+import "server-only";
 ```
 
-### Develop
+After:
 
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm run dev
+```ts
+import ensureServer from "custom-server-only";
+ensureServer("Error message here");
 ```
 
-### Remote Caching
+If you want to use the default error message instead, use `ensureServer()`. (But why don't you use `server-only` directly in that case?)
 
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+### `custom-client-only`
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
+Before:
 
-```
-cd my-turborepo
-pnpm dlx turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your turborepo:
-
-```
-pnpm dlx turbo link
+```ts
+import "client-only";
 ```
 
-## Useful Links
+After:
 
-Learn more about the power of Turborepo:
+```ts
+import ensureClientOnly from "custom-client-only";
+ensureClient("Error message here");
+```
 
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+If you want to use the default error message instead, use `ensureClient()`. You get the idea. (But why don't you use `client-only` directly in that case?)
