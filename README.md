@@ -22,6 +22,10 @@ which makes it easier for library users to debug.
 
 ### `custom-server-only`
 
+```
+npm install custom-server-only
+```
+
 Before:
 
 ```ts
@@ -38,6 +42,10 @@ ensureServer("Error message here");
 If you want to use the default error message instead, use `ensureServer()`. (But why don't you use `server-only` directly in that case?)
 
 ### `custom-client-only`
+
+```
+npm install custom-client-only
+```
 
 Before:
 

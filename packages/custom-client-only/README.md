@@ -20,6 +20,10 @@ which makes it easier for library users to debug.
 
 ## Usage
 
+```
+npm install custom-client-only
+```
+
 Before:
 
 ```ts
