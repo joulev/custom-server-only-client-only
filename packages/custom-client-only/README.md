@@ -1,6 +1,6 @@
-# `custom-server-only` and `custom-client-only`
+# `custom-client-only`
 
-This package is a `server-only` and `client-only` alternative that library authors can use to customise the error message.
+This package is a `client-only` alternative that library authors can use to customise the error message.
 
 ## Why?
 
@@ -20,25 +20,6 @@ which makes it easier for library users to debug.
 
 ## Usage
 
-### `custom-server-only`
-
-Before:
-
-```ts
-import "server-only";
-```
-
-After:
-
-```ts
-import ensureServer from "custom-server-only";
-ensureServer("Error message here");
-```
-
-If you want to use the default error message instead, use `ensureServer()`. (But why don't you use `server-only` directly in that case?)
-
-### `custom-client-only`
-
 Before:
 
 ```ts
@@ -52,4 +33,6 @@ import ensureClient from "custom-client-only";
 ensureClient("Error message here");
 ```
 
-If you want to use the default error message instead, use `ensureClient()`. You get the idea. (But why don't you use `client-only` directly in that case?)
+If you want to use the default error message instead, use `ensureClient()`. (But why don't you use `client-only` directly in that case?)
+
+See also [`custom-server-only`](https://www.npmjs.com/custom-server-only).
