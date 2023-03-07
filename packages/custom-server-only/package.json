@@ -5,7 +5,10 @@
     "react"
   ],
   "version": "0.0.1",
+  "author": "Vu Van Dung",
   "license": "MIT",
+  "repository": "https://github.com/joulev/custom-server-only-client-only",
+  "bugs": "https://github.com/joulev/custom-server-only-client-only/issues",
   "files": [
     "default.js",
     "react-server.js"
